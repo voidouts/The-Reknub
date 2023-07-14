@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Content 
+	Author="..." 
+	Dependencies="" 
+	Description_english="Addon tests" 
+	Description_spanish="Amnesia: The Bunker pero con textos inútiles" 
+	LauncherPic="LauncherPic.png" 
+	Title="Tests" 
+	Type="AddOn" 
+	UID="" 
+	Version="1.0"
+	
+	LanguageFolder = "config/lang/"
+/>
