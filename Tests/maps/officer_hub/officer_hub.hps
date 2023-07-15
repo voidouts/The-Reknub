@@ -235,10 +235,6 @@ class cScrMap : iScrMap
 		///////////////////////
 		// Setup stalker
 		Blackboard_DoStalkerMapTransfer("Stalker_1");
-		Entity_CreateAtEntityExt("gen_1", "generator.ent", "Stalker_1", true, cVector3f(0.5, 0.5, 0.5), cVector3f(0, 0, 0), cVector3f(0, 0, 0), true);
-		Entity_SetCollideCharacter("gen_1", false);
-		Entity_AttachToSocket("gen_1", "Stalker_1", "Socket_Head", true, true);
-		Map_GetEntity("Stalker_1").GetMeshEntity().SetVisible(false);
 		
 		//////////////////////
 		// Setup lockdown anims
@@ -291,6 +287,9 @@ class cScrMap : iScrMap
 		float fPrisonDoorOpenAmount = cScript_GetGlobalVarFloat("PrisonDoorOpenAmount");
 		if (fPrisonDoorOpenAmount > 0.f)
 			SwingDoor_SetOpenAmount("prison_bars_door_1", fPrisonDoorOpenAmount);
+			
+		Entity_CreateAtEntityExt("gen_1", "generator.ent", "paris_tree_01_2", true, cVector3f(0.5, 0.5, 0.5), cVector3f(0, 0, 0), cVector3f(0, 0, 0), true);
+		Entity_SetCollideCharacter("gen_1", false);
 	}
 
 	//-------------------------------------------------------
@@ -407,7 +406,6 @@ class cScrMap : iScrMap
 			tString sHole = msStalkerEmergeHoles[0];	
 				
 			Entity_SetActive("Stalker_1", true);
-			Map_GetEntity("Stalker_1").GetMeshEntity().SetVisible(false);
 			Stalker_SetEmergeAllowed("Stalker_1", true);
 			Stalker_SetMode("Stalker_1", eStalkerMode_Active, true);
 			Stalker_SetTenacity("Stalker_1", 0.5f);
@@ -679,7 +677,6 @@ class cScrMap : iScrMap
 		if (Entity_IsActive("Stalker_1") == false)
 		{
 			Entity_SetActive("Stalker_1", true);
-			Map_GetEntity("Stalker_1").GetMeshEntity().SetVisible(false);
 			
 			Stalker_SetEmergeAllowed("Stalker_1", false);
 			Stalker_GoToHole("Stalker_1", pSecondClosestHole.GetName(), true, true);
@@ -2343,14 +2340,9 @@ class cScrMap : iScrMap
 				////////////////////////////
 				// Enable the real agent entity
 				Entity_SetActive("Stalker_1", true);
-				Map_GetEntity("Stalker_1").GetMeshEntity().SetVisible(false);
 				Stalker_SetEmergeAllowed("Stalker_1", false);
 				Stalker_GoToHole("Stalker_1", "GhoulHole_3", true, true);
 				
-				Entity_CreateAtEntityExt("gen_1", "generator.ent", "Stalker_1", true, cVector3f(0.45, 0.45, 0.45), cVector3f(0, 0, 0), cVector3f(0, 0, 0), true);
-				Entity_SetCollideCharacter("gen_1", false);
-				Entity_AttachToSocket("gen_1", "Stalker_1", "Socket_Head", true, true);
-						
 				Player_FadeMoveSpeedMulTo(1.0f, 0.5f, ePlayerMoveSpeedMulType_Script);
 				Player_FadeRunSpeedMulTo(1.0f, 0.5f);
 				
@@ -2466,7 +2458,7 @@ class cScrMap : iScrMap
 			else if (Sequence_DoStepAndWait(18.f))
 			{
 				Entity_SetActive("Stalker_1", true);
-				Map_GetEntity("Stalker_1").GetMeshEntity().SetVisible(false);
+				
 				Stalker_SetEmergeAllowed("Stalker_1", false);
 				Stalker_GoToHole("Stalker_1", "GhoulHole_1", true, true);				
 				Stalker_GoToHole("Stalker_1", "GhoulHole_13");
@@ -2553,13 +2545,15 @@ class cScrMap : iScrMap
 		
 		bool OnTrigger_Player_ActivateStalkerEarly(const tString &in asParent, const tString &in asChild, int alState)
 		{
+			Entity_CreateAtEntityExt("gen_1", "generator.ent", "paris_tree_01_2", true, cVector3f(0.45, 0.45, 0.45), cVector3f(0, 0, 0), cVector3f(0, 0, 0), true);
+			Entity_SetCollideCharacter("gen_1", false);
+			
 			mStalkerEmergeStage = eHub_StalkerEmergeStage_Emerge;
 					
 			bool bWasActive = Entity_IsActive("Stalker_1");
 			tString sHole = msStalkerEmergeHoles[0];
 				
 			Entity_SetActive("Stalker_1", true);
-			Map_GetEntity("Stalker_1").GetMeshEntity().SetVisible(false);
 			Stalker_SetEmergeAllowed("Stalker_1", true);
 			Stalker_SetMode("Stalker_1", eStalkerMode_Passive, true);
 			Stalker_SetTenacity("Stalker_1", 0.5f);
@@ -2975,7 +2969,6 @@ class cScrMap : iScrMap
 			bool bWasActive = Entity_IsActive("Stalker_1");
 			
 			Entity_SetActive("Stalker_1", true);
-			Map_GetEntity("Stalker_1").GetMeshEntity().SetVisible(false);
 			Stalker_SetEmergeAllowed("Stalker_1", false);
 			Stalker_SetMode("Stalker_1", eStalkerMode_Active, true);
 			Stalker_SetTenacity("Stalker_1", 0.75f);
@@ -2986,7 +2979,6 @@ class cScrMap : iScrMap
 			Stalker_GoToHole("Stalker_1", sGoalHole);
 			
 			mStalkerEmergeStage = eHub_StalkerEmergeStage_RoamInHoles;
-			
 			
 			Blackboard_SetStalkerReachOutHoleCooldown(60.f * 10.f);
 			
@@ -3050,11 +3042,9 @@ class cScrMap : iScrMap
 					tString sHole = msStalkerEmergeHoles[lId - 1];
 					
 					Entity_SetActive("Stalker_1", true);
-					Map_GetEntity("Stalker_1").GetMeshEntity().SetVisible(false);
 					Stalker_SetEmergeAllowed("Stalker_1", true);
 					Stalker_SetMode("Stalker_1", eStalkerMode_Active, true);
 					Stalker_SetTenacity("Stalker_1", 0.5f);
-					PlayerBody_SetActive(false);
 					
 					if (bWasActive == false)
 						Stalker_GoToHole("Stalker_1", sHole, true, true);
@@ -3244,7 +3234,6 @@ class cScrMap : iScrMap
 			Entity_AlignBaseMatrix("Lockdown_Wheel_broken", "Lockdown_Wheel_damaged");
 			Sound_CreateAtEntity("Wheel_Break", "officer_hub/cutscene/wheel_break", "LockdownWheel_Proxy");
 			Entity_SetActive("LockdownWheel_Proxy", true);
-			Map_GetEntity("Lockdown_Wheel_broken").GetMeshEntity().SetVisible(false);
 						
 			cLuxProp@ pCog = cLux_ID_Prop(m_idLockdownCog);
 			cAnimationState@ pCogAnim = pCog !is null ? pCog.GetMeshEntity().GetAnimationStateFromName("cogwheel_rotate") : null;

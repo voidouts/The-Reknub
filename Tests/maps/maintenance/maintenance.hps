@@ -151,10 +151,6 @@ class cScrMap : iScrMap
 		///////////////////////
 		// Setup stalker
 		Blackboard_DoStalkerMapTransfer("stalker_1");
-		Entity_CreateAtEntityExt("gen_1", "generator.ent", "stalker_1", true, cVector3f(0.45, 0.45, 0.45), cVector3f(0, 0, 0), cVector3f(0, 0, 0), true);
-		Entity_SetCollideCharacter("gen_1", false);
-		Entity_AttachToSocket("gen_1", "Stalker_1", "Socket_Head", true, true);
-		Map_GetEntity("stalker_1").GetMeshEntity().SetVisible(false);
 		
 		if (cScript_GetGlobalVarBool("StalkerPickedUpRabbit"))
 		{
@@ -214,6 +210,9 @@ class cScrMap : iScrMap
 		////////////
 		// Map change
 		Game_SetupAfterMapChange();
+		
+		//Entity_CreateAtEntityExt("gen_1", "generator.ent", "crate_military_exupery_2", true, cVector3f(0.5, 0.5, 0.5), cVector3f(0, 0, 0), cVector3f(0, 0, 0), true);
+		//Entity_SetCollideCharacter("gen_1", false);
 	}
 
 	//-------------------------------------------------------
@@ -227,7 +226,6 @@ class cScrMap : iScrMap
 		// Audio
 		Sound_Stop("Sound_HallCreak_*", 5.0f);
 		Sound_Stop("Sound_WarGuns", 5.0f);
-	
 	}
 
 	//-------------------------------------------------------
